@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+  }
+
+  .dark body {
+    @apply bg-ink text-paper;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-signal/30 text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0FA99A;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .skeleton {
+    @apply relative overflow-hidden bg-sand dark:bg-ink-soft;
+  }
+
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.45),
+      transparent
+    );
+    background-size: 500px 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+
+  .dark .skeleton::after {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+    background-size: 500px 100%;
+  }
+
+  .container-app {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Dual-thumb price range slider: two overlapping <input type="range">
+   elements share a track; only their thumbs are interactive. */
+.range-thumb {
+  height: 0;
+}
+.range-thumb::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 0;
+}
+.range-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: auto;
+  height: 16px;
+  width: 16px;
+  margin-top: 0;
+  border-radius: 999px;
+  background: #0fa99a;
+  border: 3px solid #fafaf8;
+  box-shadow: 0 1px 4px rgba(18, 22, 42, 0.35);
+  cursor: pointer;
+}
+.range-thumb::-moz-range-track {
+  height: 0;
+  background: transparent;
+}
+.range-thumb::-moz-range-thumb {
+  pointer-events: auto;
+  height: 16px;
+  width: 16px;
+  border-radius: 999px;
+  background: #0fa99a;
+  border: 3px solid #fafaf8;
+  box-shadow: 0 1px 4px rgba(18, 22, 42, 0.35);
+  cursor: pointer;
+}
+
+/* thin, quiet scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(58, 64, 102, 0.25);
+  border-radius: 999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(239, 237, 228, 0.2);
+}
